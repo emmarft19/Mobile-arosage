@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
-import { CameraType } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
+import { CameraType } from 'expo-camera';
 
 export default function PhotosScreen() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
   const cameraRef = useRef<Camera | null>(null);
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -20,6 +22,7 @@ export default function PhotosScreen() {
         const photo = await cameraRef.current.takePictureAsync();
         if (photo && photo.uri) {
           console.log("Photo prise :", photo.uri);
+          setPhotoUri(photo.uri);
           savePhoto(photo.uri);
         } else {
           console.error("Erreur lors de la prise de la photo : la réponse est null ou ne contient pas d'URI.");
@@ -55,12 +58,16 @@ export default function PhotosScreen() {
         style={styles.camera}
         type={CameraType.back}
       />
-
+  
       <TouchableOpacity style={styles.button} onPress={takePicture}>
         <Text style={styles.text}>Prendre une photo</Text>
       </TouchableOpacity>
+  
+      {photoUri && (
+        <Image source={{ uri: photoUri }} style={styles.image} />
+      )}
     </View>
-  );
+  );  
 }
 
 const styles = StyleSheet.create({
@@ -81,5 +88,11 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'cover',
+    marginTop: 20,
   },
 });

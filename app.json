@@ -34,16 +34,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "@react-native-google-signin/google-signin",
       [
-        "expo-build-properties",
+        "expo-camera",
         {
-          "android": {
-            "usesCleartextTraffic": true
-          },
-          "ios": {
-            "NSCameraUsageDescription": "Nous avons besoin d'accéder à votre appareil photo pour prendre des photos."
-          }
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
         }
       ]
     ],
