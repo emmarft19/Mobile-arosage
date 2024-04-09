@@ -8,7 +8,8 @@ export default function TabTwoScreen() {
         <Text style={styles.tabText}>Profils</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabItem}>
-        <Text style={styles.tabText}>Mes Plantes</Text>
+        <Text style={styles.tabText}>Mes Plantes
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabItem}>
         <Text style={styles.tabText}>FAQ</Text>
