@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, Alert } from "react-native";
-import {registerUser} from './apiRequests';
+import { AuthentificationService, } from './apiRequests';
 
 const RegisterPage: React.FC = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleRegister = () => {
-        registerUser(email, password);
+
+    const handleRegister = async () => {
+
+        const user = await AuthentificationService.loginUser(email, password)
+
     };
 
     return (

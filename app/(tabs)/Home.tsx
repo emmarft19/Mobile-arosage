@@ -56,7 +56,7 @@ export default function TabOneScreenApp () {
             
             <Text>
               {item.name}, {item.description}, {item.created_at}, {item.path_image}, {item.updated_at}, {item.user_created_name}
-              <button style={styles.button} onClick={()=>{window.location=`/post/${item.id}`}}>Contacter</button>
+              
             </Text>
           )}
         />
