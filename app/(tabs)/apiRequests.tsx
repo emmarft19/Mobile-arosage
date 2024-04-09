@@ -1,4 +1,9 @@
 import {Alert} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import  React, {useEffect, useState} from "react";
+import { Stack } from 'expo-router';
+
 
 export class AuthentificationService {
 
@@ -10,6 +15,12 @@ export class AuthentificationService {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({email, password})})
+
+            if (response.ok) {
+                
+
+                navigation.navigate('Profile');
+            }
         }
         catch(e){
             console.log(e)
