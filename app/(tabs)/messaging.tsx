@@ -82,7 +82,7 @@ export default function App() {
                 <Text style={styles.messageText}>{item.message}</Text>
               </View>
             )}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item, index) => String()}
             contentContainerStyle={styles.messageContainer}
           />
           <View style={styles.inputContainer}>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
@@ -34,7 +33,7 @@ export default function TabLayout() {
         tabBarLabelStyle: { color: 'white' },
       }}>
       <Tabs.Screen
-        name="index"
+        name="Home"
         options={{
           title: 'Plantes',
           tabBarIcon: ({ color }) => <FontAwesome name="leaf" size={24} color={color} />,
@@ -43,7 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="advice"
         options={{
-          title: 'Notes',
+          title: 'Conseils',
           tabBarIcon: ({ color }) => <FontAwesome name="sticky-note" size={24} color={color} />,
         }}
       />
