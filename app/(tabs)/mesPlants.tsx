@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { AuthentificationService } from './AuthentificationService';
+import { AuthentificationService } from '../../components/AuthentificationService';
 import { PlantService } from '../../components/plantService';
 
 const MyPlantsPage: React.FC = () => {
