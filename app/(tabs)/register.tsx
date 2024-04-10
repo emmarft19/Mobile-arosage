@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, Alert } from "react-native";
-import { AuthentificationService, } from './AuthentificationService';
+import { AuthentificationService, } from '../../components/AuthentificationService';
 
 
 const RegisterPage: React.FC = () => {
@@ -18,14 +18,14 @@ const RegisterPage: React.FC = () => {
     return (
         <View>
 
-            <Text>
+            <Text style= {styles.label}>
                 Email : 
             </Text>
             <TextInput
                 onChangeText={(text) => setEmail(text)}
                 value={email}
                 placeholder="Entrez votre adresse email (exemple@exemple.com)" />
-            <Text>Mot de passe: </Text>
+            <Text style= {styles.label}>Mot de passe: </Text>
             <TextInput 
                 onChangeText={(text) => setPassword(text)}
                 value={password}
@@ -38,3 +38,28 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 20,
+    },
+    label: {
+      marginBottom: 10,
+      fontSize: 16,
+    },
+    textInput: {
+      marginBottom: 15,
+      padding: 10,
+      fontSize: 16,
+      borderRadius: 5,
+      backgroundColor: '#f0f0f0',
+    },
+    button: {
+      padding: 15,
+      borderRadius: 5,
+      backgroundColor: '#4CAF50', // Adjust background color as needed
+      color: '#fff',
+    },
+  });
