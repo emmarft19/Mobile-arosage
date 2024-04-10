@@ -22,12 +22,12 @@ const Mapping: React.FC = () => {
         style={styles.map}
         region={mapRegion}
         showsUserLocation={true}
-        provider={{ googleApiKey: GOOGLE_MAPS_API_KEY }}
+        provider = 'google' {{ googleApiKey: GOOGLE_MAPS_API_KEY }}
         >
         <Marker
           coordinate={{
-            latitude: 48.856614,
-            longitude: 2.3488,
+            latitude: 44.833328,
+            longitude: -0.56667
           }}
           title="Paris"
           description="La capitale de la France"
@@ -37,16 +37,17 @@ const Mapping: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-});
-
 export default Mapping;
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    map: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    },
+  });
