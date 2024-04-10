@@ -17,6 +17,8 @@ export class AuthentificationService {
             body: JSON.stringify({email, password})})
 
             if (response.ok) {
+
+                
                 
 
                 navigation.navigate('Profile');

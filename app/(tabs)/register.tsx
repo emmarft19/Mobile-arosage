@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, Alert } from "react-native";
-import { AuthentificationService, } from './apiRequests';
+import { AuthentificationService, } from '../services/authentificationService';
 
 const RegisterPage: React.FC = () => {
 

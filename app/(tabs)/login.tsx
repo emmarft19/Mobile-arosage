@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from  "react-native";
-import { AuthentificationService} from './apiRequests';
+import { AuthentificationService} from '../services/authentificationService';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
     const handleLogin = async () => {
-        const response= await AuthentificationService.loginUser(email, password)
+        const response = await AuthentificationService.loginUser(email, password)
     }
     const styles = StyleSheet.create({
         container: {

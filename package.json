@@ -16,7 +16,6 @@
     "@expo/vector-icons": "^14.0.0",
     "@react-native-community/cameraroll": "^4.1.2",
     "@react-native-google-signin/google-signin": "^11.0.1",
-    "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "expo": "~50.0.15",
     "expo-build-properties": "^0.11.1",
