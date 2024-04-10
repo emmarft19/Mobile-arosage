@@ -1,29 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList } from 'react-native';
 
-//export default function TabOneScreen() {
-  
 type Data = {
   id: string;
   name: string;
   description: string;
   created_at: string;
   path_image: string;
-  user_created: number,
-  date_begin: string,
-  date_end: string,
-  is_published: number,
-  updated_at: string
-  user_created_name : string;
+  user_created: number;
+  date_begin: string;
+  date_end: string;
+  is_published: number;
+  updated_at: string;
+  user_created_name: string;
 };
 
-export default function TabOneScreenApp () {
-
-
-//const App = () => {
+export default function TabOneScreenApp() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<Data[]>([]);
 
@@ -45,19 +40,33 @@ export default function TabOneScreenApp () {
 
   return (
     <View style={styles.container}>
-    <EditScreenInfo path="app/(tabs)/Home.tsx" />
+      <EditScreenInfo path="app/(tabs)/Home.tsx" />
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <FlatList
           data={data}
-          keyExtractor={({id}) => id}
-          renderItem={({item}) => (
-            
-            <Text>
-              {item.name}, {item.description}, {item.created_at}, {item.path_image}, {item.updated_at}, {item.user_created_name}
+          keyExtractor={({ id }) => id}
+          renderItem={({ item }) => (
+            <View style={styles.item}>
+              <Text style={styles.label}>Name: </Text>
+              <Text style={styles.value}>{item.name}</Text>
               
-            </Text>
+              <Text style={styles.label}>Description: </Text>
+              <Text style={styles.value}>{item.description}</Text>
+              
+              <Text style={styles.label}>Created At: </Text>
+              <Text style={styles.value}>{item.created_at}</Text>
+              
+              <Text style={styles.label}>Path Image: </Text>
+              <Image source={{uri: item.path_image}} style={styles.image}/>
+              
+              <Text style={styles.label}>Updated At: </Text>
+              <Text style={styles.value}>{item.updated_at}</Text>
+              
+              <Text style={styles.label}>User Created Name: </Text>
+              <Text style={styles.value}>{item.user_created_name}</Text>
+            </View>
           )}
         />
       )}
@@ -65,48 +74,30 @@ export default function TabOneScreenApp () {
   );
 };
 
-
-  /*return (
-    
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      
-    </View>
-  );
-}*/
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  button : {
-    flexDirection: 'row' , 
-    fontSize: 15,
-    color:'#fff',
-    backgroundColor:"#4638ab",
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
   item: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginBottom: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 10,
+  },
+  label: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: 'black', 
+  },
+  value: {
+    marginBottom: 10,
+    color: 'black', 
   },
   image: {
     width: 100,
     height: 100,
-    marginRight: 20,
-  },
-  textContainer: {
-    flex: 1,
+    marginBottom: 10,
   },
 });
