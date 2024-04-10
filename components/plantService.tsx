@@ -1,5 +1,6 @@
+import axios from 'axios';
 import { AxiosResponse } from 'axios';
-import { Plant } from './models/Plant';
+import { Plant } from '..components/plants.tsx';
 
 
 export class PlantService {
