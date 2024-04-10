@@ -25,6 +25,12 @@
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
+        <key>LSApplicationQueriesSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.GSE</string>
+        </array>
+        <key>com.google.Maps.APIKey</key>
+        <string>AIzaSyBoA4HNrFcxyJOem6To_xmbGmDjOQpn3iM</string>
         <key>CFBundleURLSchemes</key>
         <array>
           <string>myapp</string>

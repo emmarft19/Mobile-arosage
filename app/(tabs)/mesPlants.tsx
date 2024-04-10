@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { AuthentificationService } from './AuthentificationService';
-import { PlantService } from '..components/plantService';
+import { PlantService } from '../../components/plantService';
 
 const MyPlantsPage: React.FC = () => {
   const [plants, setPlants] = useState([]);

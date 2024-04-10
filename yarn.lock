@@ -6988,6 +6988,11 @@ react-native-camera@^4.2.1:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-google-maps@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-maps/-/react-native-google-maps-1.0.0.tgz#df55b421642bd02ba9cb95229ca9f5546db0208c"
+  integrity sha512-EbvyzGhlhXRHNxruGE1BwwjzlLUwQNxnkHRFF4qa+4AVnCe25hOHghxT2b1AJH7dMBVE84bmTTlm/IWAc43jMA==
+
 react-native-maps@^1.13.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.13.0.tgz#ea8da66c479c0a75ce41fc2a894927374b60701e"
