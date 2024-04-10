@@ -40,7 +40,6 @@ export default function TabOneScreenApp() {
 
   return (
     <View style={styles.container}>
-      <EditScreenInfo path="app/(tabs)/Home.tsx" />
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -48,23 +47,23 @@ export default function TabOneScreenApp() {
           data={data}
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
-            <View style={styles.item}>
-              <Text style={styles.label}>Name: </Text>
+            <View key={item.id} style={styles.item}>
+              <Text style={styles.label}>Nom: </Text>
               <Text style={styles.value}>{item.name}</Text>
               
               <Text style={styles.label}>Description: </Text>
               <Text style={styles.value}>{item.description}</Text>
               
-              <Text style={styles.label}>Created At: </Text>
+              <Text style={styles.label}>Créé à: </Text>
               <Text style={styles.value}>{item.created_at}</Text>
               
-              <Text style={styles.label}>Path Image: </Text>
+              <Text style={styles.label}>Image: </Text>
               <Image source={{uri: item.path_image}} style={styles.image}/>
               
-              <Text style={styles.label}>Updated At: </Text>
+              <Text style={styles.label}>Publié à: </Text>
               <Text style={styles.value}>{item.updated_at}</Text>
               
-              <Text style={styles.label}>User Created Name: </Text>
+              <Text style={styles.label}>Posté par: </Text>
               <Text style={styles.value}>{item.user_created_name}</Text>
             </View>
           )}
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
   item: {
     marginBottom: 20,
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     color: 'black', 
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 400, 
+    height: 400, 
     marginBottom: 10,
   },
 });
