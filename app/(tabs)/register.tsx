@@ -10,12 +10,19 @@ const RegisterPage: React.FC = () => {
 
     const handleRegister = async () => {
 
-        const user = await AuthentificationService.loginUser(email, password)
+        const r = await AuthentificationService.registerUser(email, password, name, profile_photo_path)
 
     };
 
     return (
         <View>
+            <Text>Votre nom: </Text>
+            <TextInput 
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+                placeholder="Entrez votre nom svp" 
+                 
+            />
 
             <Text>
                 Email : 
@@ -31,6 +38,7 @@ const RegisterPage: React.FC = () => {
                 placeholder="Entrez votre mot de passe" 
                 secureTextEntry 
             />
+            
             <Button title="Créer un compte" onPress={handleRegister} />
     </View>
     );
