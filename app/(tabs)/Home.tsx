@@ -1,6 +1,7 @@
-import { StyleSheet, TextInput, Text, View, Image, ActivityIndicator, FlatList } from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, TextInput, Text, View, Image, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import MapView from 'react-native-maps';
+import { AntDesign } from '@expo/vector-icons'; // Importer l'icône de la bibliothèque vectorielle AntDesign
 
 type Data = {
   id: string;
@@ -20,12 +21,16 @@ export default function TabOneScreenApp() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<Data[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showMap, setShowMap] = useState(false);
+  const [searchResult, setSearchResult] = useState<Data[]>([]);
+  const [searchError, setSearchError] = useState(false);
 
   const getData = async () => {
     try {
       const response = await fetch('https://22c2-83-142-150-170.ngrok-free.app/api/plants');
       const json = await response.json();
       setData(json.data);
+      setSearchResult(json.data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -39,63 +44,77 @@ export default function TabOneScreenApp() {
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
+    const filtered = data.filter(item =>
+      item.name.toLowerCase().includes(text.toLowerCase())
+    );
+    setSearchResult(filtered);
+    setSearchError(filtered.length === 0);
   };
-
-  const renderHighlightedText = (text: string) => {
-    if (!searchQuery) {
-      return <Text>{text}</Text>;
-    }
-  
-    const regex = new RegExp(`\\b${searchQuery}\\b`, 'gi');
-    const parts = text.split(regex);
-  
-    return parts.map((part, index) => (
-      regex.test(part) ? <Text key={index} style={styles.highlight}>{part}</Text> : <Text key={index}>{part}</Text>
-    ));
-  };  
-
-  const filteredData = data.filter(item =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Recherche..."
-          value={searchQuery}
-          onChangeText={handleSearch}
-        />
-      </View>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          data={filteredData}
-          keyExtractor={({ id }) => id}
-          renderItem={({ item }) => (
-            <View key={item.id} style={styles.item}>
-              <Text style={styles.label}>Nom: </Text>
-              {renderHighlightedText(item.name)}
-              
-              <Text style={styles.label}>Description: </Text>
-              {renderHighlightedText(item.description)}
-              
-              <Text style={styles.label}>Créé à: </Text>
-              {renderHighlightedText(item.created_at)}
-              
-              <Text style={styles.label}>Image: </Text>
-              <Image source={{uri: item.path_image}} style={styles.image}/>
-              
-              <Text style={styles.label}>Publié à: </Text>
-              {renderHighlightedText(item.updated_at)}
-              
-              <Text style={styles.label}>Posté par: </Text>
-              {renderHighlightedText(item.user_created_name)}
-            </View>
+      {!showMap && (
+        <>
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Recherche..."
+              value={searchQuery}
+              onChangeText={handleSearch}
+            />
+          </View>
+          {searchError && (
+            <Text style={styles.errorText}>Aucun résultat trouvé</Text>
           )}
-        />
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <FlatList
+              data={searchResult}
+              keyExtractor={({ id }) => id}
+              renderItem={({ item }) => (
+                <View key={item.id} style={styles.item}>
+                  <Text style={styles.label}>Nom: </Text>
+                  <Text>{item.name}</Text>
+                  
+                  <Text style={styles.label}>Description: </Text>
+                  <Text>{item.description}</Text>
+                  
+                  <Text style={styles.label}>Créé à: </Text>
+                  <Text>{item.created_at}</Text>
+                  
+                  <Text style={styles.label}>Image: </Text>
+                  <Image source={{uri: item.path_image}} style={styles.image}/>
+                  
+                  <Text style={styles.label}>Publié à: </Text>
+                  <Text>{item.updated_at}</Text>
+                  
+                  <Text style={styles.label}>Posté par: </Text>
+                  <Text>{item.user_created_name}</Text>
+                </View>
+              )}
+            />
+          )}
+          <TouchableOpacity style={styles.mapButton} onPress={() => setShowMap(true)}>
+            <Text style={styles.mapButtonText}>Afficher la carte</Text>
+          </TouchableOpacity>
+        </>
+      )}
+      {showMap && (
+        <>
+          <TouchableOpacity style={styles.backButton} onPress={() => setShowMap(false)}>
+            <AntDesign name="arrowleft" size={24} color="black" />
+          </TouchableOpacity>
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: 44.833328,
+              longitude: -0.56667,
+              latitudeDelta: 0.09,
+              longitudeDelta: 0.09,
+            }}
+          />
+        </>
       )}
     </View>
   );
@@ -142,6 +161,31 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   highlight: {
-    backgroundColor: 'pink',
+    color: 'pink', // Texte surligné en rose
+  },
+  map: {
+    flex: 1,
+  },
+  mapButton: {
+    backgroundColor: 'green', // Fond vert
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
+    alignItems: 'center',
+  },
+  mapButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 9999,
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
