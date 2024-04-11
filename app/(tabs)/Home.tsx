@@ -23,7 +23,7 @@ export default function TabOneScreenApp() {
 
   const getData = async () => {
     try {
-      const response = await fetch('https://4abb-2a02-8428-ed77-e101-7113-3201-9830-4fca.ngrok-free.app/api/plants');
+      const response = await fetch('https://22c2-83-142-150-170.ngrok-free.app/api/plants');
       const json = await response.json();
       setData(json.data);
     } catch (error) {
