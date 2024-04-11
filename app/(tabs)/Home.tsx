@@ -23,7 +23,6 @@ type Data = {
 export default function TabOneScreenApp () {
 
 
-//const App = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<Data[]>([]);
 
